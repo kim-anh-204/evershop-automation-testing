@@ -1,0 +1,1 @@
+{"uuid":"d0514151-afc1-4492-b7b4-bd6b8dd6a7d9","name":"com.evershop.tests.AddAddressTest","children":["8078186d-75d2-4649-8428-b298cf86c9c9"],"befores":[{"name":"setupClass","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1761677308400,"stop":1761677308788}],"afters":[],"start":1761677308343,"stop":1761677326894}

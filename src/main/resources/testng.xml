@@ -1,0 +1,10 @@
+<suite name="Evershop Test Suite" parallel="methods" thread-count="3" preserve-order="true">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+    <test name="Search Tests">
+        <classes>
+            <class name="com.evershop.tests.SearchTests"/>
+        </classes>
+    </test>
+</suite>

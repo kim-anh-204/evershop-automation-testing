@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extentreports>
+    <configuration>
+        <!-- Report theme: DARK, STANDARD -->
+        <theme>DARK</theme>
+
+        <!-- Document title -->
+        <documentTitle>Evershop Automation Report</documentTitle>
+
+        <!-- Report name -->
+        <reportName>Test Report</reportName>
+
+        <!-- Time stamp format -->
+        <timeStampFormat>dd/MM/yyyy HH:mm:ss</timeStampFormat>
+
+        <!-- Encoding standard -->
+        <encoding>UTF-8</encoding>
+
+        <!-- Protocol for script and stylesheets -->
+        <protocol>https</protocol>
+
+        <!-- Enable timeline -->
+        <timelineEnabled>true</timelineEnabled>
+
+        <!-- Test view order -->
+        <testViewChartLocation>top</testViewChartLocation>
+
+        <!-- Exceptions as failed tests -->
+        <treatFailedAsSkip>false</treatFailedAsSkip>
+
+        <!-- Exception attribute for display -->
+        <exceptionAttribute value="Class Name"/>
+
+        <!-- Message on exception -->
+        <embedScreenshotOnThrowable>true</embedScreenshotOnThrowable>
+
+        <!-- Failed/Success ratio in chart -->
+        <failedTests>top</failedTests>
+
+        <!-- Screenshots for all steps -->
+        <screenshots>true</screenshots>
+
+        <!-- Chart visibility -->
+        <chartVisibleOnOpen>true</chartVisibleOnOpen>
+
+        <!-- Base 64 image -->
+        <base64ImageSrcEnabled>true</base64ImageSrcEnabled>
+
+        <!-- Screenshot path -->
+        <screenshotRelPath>./screenshots/</screenshotRelPath>
+
+        <!-- Enable spark lines -->
+        <enableSpark>false</enableSpark>
+    </configuration>
+</extentreports>
