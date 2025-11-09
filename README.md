@@ -49,7 +49,7 @@ mvn test -Psearch && mvn test -Paddtocart
 
 Cả hai báo cáo đều có biểu đồ tròn tương tác, giao diện chuyên nghiệp và kết quả kiểm thử đầy đủ.
 
-![Kết quả Kiểm thử Tìm kiếm](\src\img\SearchTestResult.png)
+![Kết quả Kiểm thử Tìm kiếm](src/img/SearchTestResult.png)
 
 ![Kết quả Kiểm thử Thêm vào Giỏ hàng](src/img/AddtocartTestResult.png)
 
