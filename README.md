@@ -53,6 +53,10 @@ Cả hai báo cáo đều có biểu đồ tròn tương tác, giao diện chuy�
 
 ![Kết quả Kiểm thử Thêm vào Giỏ hàng](src/img/AddtocartTestResult.png)
 
+### Báo cáo PDF
+
+- **Báo cáo Tổng hợp Kiểm thử**: [evershopTest.pdf](report/evershopTest.pdf)
+
 ## 🎯 Tổng quan Bộ Kiểm thử
 
 ### 🔍 Bộ Kiểm thử Tìm kiếm
