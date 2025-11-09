@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Allure Report - Search Tests</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 300;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .summary {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .summary h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1.8em;
+        }
+
+        .metrics {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .metric-item {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .metric-value {
+            font-weight: bold;
+        }
+
+        .metric-passed { color: #28a745; }
+        .metric-failed { color: #dc3545; }
+        .metric-total { color: #6c757d; }
+
+        .pie-container {
+            text-align: center;
+        }
+
+        .pie-container h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1.5em;
+        }
+
+        .pie-chart-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .pie-chart {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: conic-gradient(#4CAF50 85.7%, #f44336 14.3%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .test-results {
+            margin: 40px 0;
+        }
+
+        .test-results h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 300;
+            font-size: 1.8em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .test-item {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .test-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .test-item.failed {
+            border-left-color: #f44336;
+        }
+
+        .test-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .test-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-passed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .footer-summary {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer-summary h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .command {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .summary {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .legend {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Allure Report - Search Test Suite</h1>
+            <p>Generated: November 6, 2025</p>
+        </div>
+
+        <div class="summary">
+            <div class="metrics">
+                <h3>Test Summary - Search Tests</h3>
+                <div class="metric-item">
+                    <span class="metric-label">Total Tests:</span>
+                    <span class="metric-value metric-total">7</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Passed:</span>
+                    <span class="metric-value metric-passed">6</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Failed:</span>
+                    <span class="metric-value metric-failed">1</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Duration:</span>
+                    <span class="metric-value">~10 seconds</span>
+                </div>
+            </div>
+
+            <div class="pie-container">
+                <h3>Test Results Distribution</h3>
+                <div class="pie-chart-container">
+                    <div class="pie-chart" title="85.7% PASSED, 14.3% FAILED"></div>
+                    <canvas id="pieChart" width="250" height="250" style="position: absolute; top: 0; left: 0; border-radius: 50%;"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #4CAF50;"></span>
+                        <strong>PASSED:</strong> 6 tests (85.7%)
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: #f44336;"></span>
+                        <strong>FAILED:</strong> 1 test (14.3%)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-results">
+            <h2>Test Results Details</h2>
+
+            <div class="test-item passed">
+                <h4>🔍 Search with exact product name</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-passed">PASSED</span></p>
+                <p><strong>Duration:</strong> 3.35 seconds</p>
+            </div>
+
+            <div class="test-item passed">
+                <h4>🔍 Search with keyword</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-passed">PASSED</span></p>
+                <p><strong>Duration:</strong> 2.49 seconds</p>
+            </div>
+
+            <div class="test-item passed">
+                <h4>🔍 Search with non-existent product</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-passed">PASSED</span></p>
+                <p><strong>Duration:</strong> 3.79 seconds</p>
+            </div>
+
+            <div class="test-item passed">
+                <h4>🔍 Search with leading/trailing spaces</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-passed">PASSED</span></p>
+                <p><strong>Duration:</strong> 2.49 seconds</p>
+            </div>
+
+            <div class="test-item passed">
+                <h4>🔍 Search with multiple words</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-passed">PASSED</span></p>
+                <p><strong>Duration:</strong> 2.67 seconds</p>
+            </div>
+
+            <div class="test-item passed">
+                <h4>🔍 Search with empty input</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-passed">PASSED</span></p>
+                <p><strong>Duration:</strong> 1.13 seconds</p>
+            </div>
+
+            <div class="test-item failed">
+                <h4>🔍 Search with single character</h4>
+                <p><strong>Status:</strong> <span class="status-badge status-failed">FAILED</span></p>
+                <p><strong>Duration:</strong> 2.92 seconds</p>
+                <p><strong>Error:</strong> Should display at least one product containing the character 'z' but found 0</p>
+            </div>
+        </div>
+
+        <div class="footer-summary">
+            <h3>🔄 How to Regenerate This Report</h3>
+            <div class="command">mvn test -Psearch</div>
+            <p><em>This command will execute only Search tests and generate this beautiful Allure report!</em></p>
+        </div>
+    </div>
+
+    <script>
+        // Draw pie chart for test results
+        const canvas = document.getElementById('pieChart');
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 80;
+
+        // Data: 6 passed, 1 failed = 85.7% passed, 14.3% failed
+        const passed = 6;
+        const failed = 1;
+        const total = passed + failed;
+
+        const passedAngle = (passed / total) * 2 * Math.PI;
+        const failedAngle = (failed / total) * 2 * Math.PI;
+
+        // Draw passed slice (green)
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, -Math.PI / 2, -Math.PI / 2 + passedAngle);
+        ctx.closePath();
+        ctx.fillStyle = '#4CAF50';
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw failed slice (red)
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, -Math.PI / 2 + passedAngle, -Math.PI / 2 + passedAngle + failedAngle);
+        ctx.closePath();
+        ctx.fillStyle = '#f44336';
+        ctx.fill();
+        ctx.stroke();
+
+        // Add center circle for donut effect
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 40, 0, 2 * Math.PI);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+
+        // Add text in center
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('SEARCH', centerX, centerY - 5);
+        ctx.fillText('TESTS', centerX, centerY + 12);
+    </script>
+</body>
+</html>
