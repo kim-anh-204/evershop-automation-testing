@@ -44,8 +44,8 @@ mvn test -Psearch && mvn test -Paddtocart
 - **Báo cáo Thêm vào Giỏ hàng Demo**: `docs/allure-report-addtocart/index.html`
 
 ### Báo cáo Được Tạo (Sau khi chạy kiểm thử)
-- Báo cáo Tìm kiếm: `target/allure-report-search/index.html` (7 trường hợp kiểm thử, 85.7% ĐẠT)
-- Báo cáo Thêm vào Giỏ hàng: `target/allure-report-addtocart/index.html` (15 trường hợp kiểm thử, 26.7% ĐẠT)
+- Báo cáo Tìm kiếm: `target/allure-report-search/index.html` (7 trường hợp kiểm thử, 85.7% Passed)
+- Báo cáo Thêm vào Giỏ hàng: `target/allure-report-addtocart/index.html` (15 trường hợp kiểm thử, 26.7% Passed)
 
 Cả hai báo cáo đều có biểu đồ tròn tương tác, giao diện chuyên nghiệp và kết quả kiểm thử đầy đủ.
 
@@ -130,13 +130,13 @@ evershop-automation/
 
 ### Biểu đồ Tương tác
 - **Biểu đồ tròn dựa trên Canvas**
-- **Hiển thị ĐẠT/THẤT thời gian thực**
+- **Hiển thị Passed/ Failed thời gian thực**
 - **Chú giải với số lượng và tỷ lệ phần trăm kiểm thử**
 - **Hoạt hình và hiệu ứng gradient**
 
 ### Tóm tắt Kiểm thử
 - Tổng số lượng kiểm thử
-- Thống kê đạt/thất
+- Thống kê Passed/ Failed
 - Thời gian thực thi
 - Chỉ số mã màu
 
